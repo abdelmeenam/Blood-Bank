@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('pin_code')->nullable();
 
             $table->foreignId("blood_type_id")->constrained("blood_types", 'id')->cascadeOnDelete();
-            $table->foreignId("city_id ")->constrained("cities", 'id')->noActionOnDelete();
+            $table->foreignId("city_id")->constrained("cities", 'id')->noActionOnDelete();
             $table->timestamps();
         });
     }

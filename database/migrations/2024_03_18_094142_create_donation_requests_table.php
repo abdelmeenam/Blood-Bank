@@ -23,8 +23,8 @@ return new class extends Migration
             $table->decimal('latitude', 10, 8);
             $table->decimal('longitude', 10, 8);
 
-            $table->foreignId("city_id")->constrained("cities", 'id')->nullOnDelete();
-            $table->foreignId("blood_type_id")->constrained("blood_types", 'id')->nullOnDelete();
+            $table->foreignId("city_id")->nullable()->constrained("cities", 'id')->nullOnDelete();
+            $table->foreignId("blood_type_id")->constrained("blood_types", 'id')->noActionOnDelete();
             $table->foreignId("client_id")->constrained("clients", 'id')->cascadeOnDelete();
             $table->timestamps();
         });
