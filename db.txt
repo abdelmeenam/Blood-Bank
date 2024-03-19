@@ -1,0 +1,64 @@
+
+clients		
+=======
+phone|name|email|id_o_b|last_donation_date |city_id | blood_type_id| password |pin_code			(one client - many blood_type)
+
+blood_types	  cities			  				governates	   categories
+==========	  ======			  				======		   ======
+name		  name|governate_id			        		name
+		     
+posts
+=====
+title|image|content|category_id
+	
+
+donation_requests
+=================
+patient_name | patient_phone | patient_age | bags_num |  hospital_address| hospital_name | notes |longitude |latitude (decimal 10,8) 
+blood_type_id |city_id | client_id 
+
+
+notifications	(one to one)
+============
+content ,title , donation_request_id
+
+contacts
+========
+name , email , phone , subject , message 
+
+settings
+========
+notification_settings_text , about_app , phone , email , fb_link , tw_link , insta_link , whatsapp_link 
+
+
+client_post
+===========	
+client_id |post_id |is_fav
+
+
+client_notification
+===================
+client_id | notification_id | is_read
+
+
+blood_type_client		(notification setting)
+==================
+client_id | blood_type_id
+
+
+client_governorate:		(notification setting)
+===================
+client_id | governorate_id 
+
+
+
+
+
+
+
+بالنسبة لموضوع الادمنز والبوستس ايه الدنيا
+
+
+
+
+
