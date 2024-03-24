@@ -42,4 +42,16 @@ class Client extends Model
             ->using(ClientNotification::class)
             ->withPivot('is_read');
     }
+
+    // client belogns to many blood types
+    public function bloodTypes()
+    {
+        return $this->belongsToMany(BloodType::class, 'client_blood_type', 'client_id', 'blood_type_id', 'id', 'id');
+    }
+
+    //client belongs to many governates
+    public function governates()
+    {
+        return $this->belongsToMany(Governorate::class, 'client_governorate', 'client_id', 'governorate_id', 'id', 'id');
+    }
 }

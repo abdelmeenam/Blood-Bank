@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('table_blood_type_client', function (Blueprint $table) {
+        Schema::create('client_governorate_table', function (Blueprint $table) {
             $table->foreignId('client_id')->constrained('clients')->cascadeOnDelete();
-            $table->foreignId('blood_type_id')->constrained('blood_types')->cascadeOnDelete();
-            $table->primary(['client_id', 'blood_type_id']);
+            $table->foreignId('governorate_id')->constrained('governorates')->cascadeOnDelete();
+            $table->primary(['client_id', 'governorate_id']);
         });
     }
 
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('table_blood_type_client');
+        Schema::dropIfExists('client_governorate_table');
     }
 };

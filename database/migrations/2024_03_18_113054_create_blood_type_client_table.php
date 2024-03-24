@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('table_client_post', function (Blueprint $table) {
+        Schema::create('blood_type_client', function (Blueprint $table) {
             $table->foreignId('client_id')->constrained('clients')->cascadeOnDelete();
-            $table->foreignId('post_id')->constrained('posts')->cascadeOnDelete();
-            $table->primary(['client_id', 'post_id']);  // to make the combination of client_id and post_id unique
+            $table->foreignId('blood_type_id')->constrained('blood_types')->cascadeOnDelete();
+            $table->primary(['client_id', 'blood_type_id']);
         });
     }
 
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('table_client_post');
+        Schema::dropIfExists('blood_type_client');
     }
 };

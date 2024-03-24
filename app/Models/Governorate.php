@@ -19,4 +19,10 @@ class Governorate extends Model
     {
         return $this->hasMany(City::class);
     }
+
+    // governorate belongs to many clients
+    public function clients()
+    {
+        return $this->belongsToMany(Client::class);
+    }
 }

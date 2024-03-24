@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('table_client_notification', function (Blueprint $table) {
+        Schema::create('client_notification', function (Blueprint $table) {
             $table->foreignId('client_id')->constrained('clients')->cascadeOnDelete();
             $table->foreignId('notification_id')->constrained('notifications')->cascadeOnDelete();
             $table->boolean('is_read')->default(false);
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('table_client_notification');
+        Schema::dropIfExists('client_notification');
     }
 };

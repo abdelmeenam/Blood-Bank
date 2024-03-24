@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('table_client_governorate_table', function (Blueprint $table) {
+        Schema::create('client_post', function (Blueprint $table) {
             $table->foreignId('client_id')->constrained('clients')->cascadeOnDelete();
-            $table->foreignId('governorate_id')->constrained('governorates')->cascadeOnDelete();
-            $table->primary(['client_id', 'governorate_id']);
+            $table->foreignId('post_id')->constrained('posts')->cascadeOnDelete();
+            $table->primary(['client_id', 'post_id']);  // to make the combination of client_id and post_id unique
         });
     }
 
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('table_client_governorate_table');
+        Schema::dropIfExists('client_post');
     }
 };
