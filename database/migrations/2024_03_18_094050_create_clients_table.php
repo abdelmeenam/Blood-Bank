@@ -19,10 +19,12 @@ return new class extends Migration
             $table->string('password');
             $table->date('date_of_birth');
             $table->date('last_donation_date');
-            $table->string('pin_code')->nullable();
 
             $table->foreignId("blood_type_id")->constrained("blood_types", 'id')->cascadeOnDelete();
             $table->foreignId("city_id")->constrained("cities", 'id')->noActionOnDelete();
+            $table->string('pin_code')->nullable();
+
+            $table->boolean('is_active')->default(1);
             $table->timestamps();
         });
     }

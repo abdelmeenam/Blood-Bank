@@ -5,15 +5,21 @@ namespace App\Models;
 use App\Models\BloodType;
 use App\Models\ClientPost;
 use App\Models\DonationRequest;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Laravel\Sanctum\HasApiTokens;
 
-class Client extends Model
+
+class Client extends Authenticatable
 {
-    use HasFactory;
+    use HasFactory, HasApiTokens;
 
     protected $fillable = [
-        'name', 'email', 'password', 'phone', 'dob', 'last_donation_date', 'blood_type_id', 'city_id'
+        'name', 'email', 'password', 'phone', 'dob', 'last_donation_date', 'blood_type_id', 'city_id', 'date_of_birth'
+    ];
+
+    protected $hidden = [
+        'password', 'api_token', 'pin_code'
     ];
 
     //client belongs to a blood type
@@ -46,11 +52,11 @@ class Client extends Model
     // client belogns to many blood types
     public function bloodTypes()
     {
-        return $this->belongsToMany(BloodType::class, 'client_blood_type', 'client_id', 'blood_type_id', 'id', 'id');
+        return $this->belongsToMany(BloodType::class, 'blood_type_client', 'client_id', 'blood_type_id', 'id', 'id');
     }
 
     //client belongs to many governates
-    public function governates()
+    public function governorates()
     {
         return $this->belongsToMany(Governorate::class, 'client_governorate', 'client_id', 'governorate_id', 'id', 'id');
     }

@@ -51,8 +51,22 @@ client_governorate:		(notification setting)
 client_id | governorate_id
 
 
+--------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------
+
+login
+register
+cities
+governorates
 
 
+
+/edit-profile
+/notification-setting
+
+
+
+/posts-with filter(category) - search
 
 
 
