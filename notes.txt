@@ -1,3 +1,2 @@
-updateProfile
--------------
--
+posts - post - list favourites - toggle favourite
+

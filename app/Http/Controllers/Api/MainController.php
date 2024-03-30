@@ -19,16 +19,8 @@ class MainController extends Controller
 
     public function getAllCities()
     {
-
         $governorateId = request()->governorate_id;
-
         $cities = City::when($governorateId, fn ($query) => $query->where('governorate_id', $governorateId))->get();
         return apiResponse(200, 'success', $cities);
-    }
-
-    public function getAllPosts()
-    {
-        $posts = Post::all();
-        return apiResponse(200, 'success', 'Posts');
     }
 }
