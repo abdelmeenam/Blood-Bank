@@ -91,7 +91,6 @@ class AuthController extends Controller
             Mail::to($client->email)->send(new SendCodeResetPassword('Forgot Password Request', $data));
             sendSms($client->phone, $client->pin_code);
 
-
             return apiResponse(200, 'Pin code sent successfully');
         }
     }
