@@ -18,6 +18,9 @@ Route::group(['prefix' => 'v1'], function () {
     // Auth Routes
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
+    Route::post('password/email',  [AuthController::class, 'forgetPassword']);
+    Route::post('password/reset', [AuthController::class, 'resetPassword']);
+
 
     Route::group(['middleware' => 'auth:sanctum'], function () {
 
@@ -39,8 +42,6 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('filter-post-by-category', [PostController::class, 'filterByCategory']);
         Route::post('toggle-post', [PostController::class, 'postToggleFavourite']);
         Route::get('list-favourites', [PostController::class, 'getAllFavourites']);
-
-
 
 
         Route::get('/logout', [AuthController::class, 'logout']);

@@ -15,7 +15,7 @@ class Client extends Authenticatable
     use HasFactory, HasApiTokens;
 
     protected $fillable = [
-        'name', 'email', 'password', 'phone', 'dob', 'last_donation_date', 'blood_type_id', 'city_id', 'date_of_birth'
+        'name', 'email', 'password', 'phone', 'dob', 'last_donation_date', 'blood_type_id', 'city_id', 'date_of_birth', 'pin_code', 'api_token'
     ];
 
     protected $hidden = [
