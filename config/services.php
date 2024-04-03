@@ -30,5 +30,12 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
+    'firebase' => [
+        'credentials' => [
+            'file' => storage_path('firebase_credentials.json'),
+        ],
+        'database_url' => 'https://blood-bank-8ad64-default-rtdb.firebaseio.com/',
+    ],
+
 
 ];

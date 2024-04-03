@@ -13,10 +13,9 @@ class PostController extends Controller
 {
     public function getAllPosts(Request $request)
     {
-        // Retrieve paginated posts with likes
         $posts = Post::with('category')
             ->latest()
-            ->paginate(10); // Default per page is 10
+            ->paginate(10);
 
         /*
         $likedPostIds = $request->user()->posts()->exists() ? $request->user()->posts()->pluck('post_id')->toArray() : [];
@@ -85,12 +84,12 @@ class PostController extends Controller
         }
 
         $post = $request->user()->posts()->toggle($request->post_id);
-        return apiResponse(200, 'success', $post);
+        return apiResponse(200, 'Success', $post);
     }
 
     public function getAllFavourites(Request $request)
     {
-        $favourites = $request->user()->posts()->get();
+        $favourites = $request->user()->posts()->latest();
         $favourites = $favourites->isEmpty() ? apiResponse(404, 'No favourites found.') : apiResponse(200, 'success', $favourites);
         return $favourites;
     }

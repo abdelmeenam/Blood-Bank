@@ -22,7 +22,10 @@ return new class extends Migration
 
             $table->foreignId("blood_type_id")->constrained("blood_types", 'id')->cascadeOnDelete();
             $table->foreignId("city_id")->constrained("cities", 'id')->noActionOnDelete();
+            $table->foreignId('governorate_id')->constrained('governorates', 'id')->noActionOnDelete();
+
             $table->string('pin_code')->nullable();
+            $table->dateTime('pin_code_expires_at')->nullable();
 
             $table->boolean('is_active')->default(1);
             $table->timestamps();

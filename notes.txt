@@ -1,2 +1,37 @@
-posts - post - list favourites - toggle favourite
+Accessors - Mutotrs
+-------------------
+Accessors: Used to manipulate attributes when retrieving them from the database.
+They are defined using the get{AttributeName}Attribute convention in the model.
 
+   public function getFullNameAttribute()
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
+
+Mutators: Used to manipulate attributes when setting them on the model.
+They are defined using the set{AttributeName}Attribute convention in the model.
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
+
+
+attach() , deattach() , sync() , toggle()
+------------------------
+$user->roles()->attach([1, 2]);
+// Output: User with ID 1 now has roles with IDs 1 and 2 attached.
+
+$user->roles()->detach([1]);
+// Output: Role with ID 1 is detached from the user with ID 1.
+
+$user->roles()->sync([2, 3]);
+// Output: User with ID 1 now has roles with IDs 2 and 3 attached and any other existing roles are detached.
+
+$user->roles()->toggle(3);
+// Output: If role with ID 3 was attached to the user, it will be detached. If it wasn't attached, it will be attached.
+
+
+DB notes
+--------
+$request->user()->posts هنا جبت الداتا
+$request->user()->posts()->latest()   مجرد ماعملت الفوسين كده دخلت ع الكويرى بيلدر وهعمل كويرى ع البوستس

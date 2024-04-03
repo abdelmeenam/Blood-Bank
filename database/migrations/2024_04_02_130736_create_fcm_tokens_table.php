@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('clients', function (Blueprint $table) {
-            $table->dateTime('pin_code_expires_at')->nullable();
+        Schema::create('fcm_tokens', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('client_id')->constrained()->onDelete('cascade');
+            $table->string('token')->unique();
+            $table->timestamps();
         });
     }
 
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('clients', function (Blueprint $table) {
-            $table->dropColumn('pin_code_expires_at');
-        });
+        Schema::dropIfExists('fcm_tokens');
     }
 };

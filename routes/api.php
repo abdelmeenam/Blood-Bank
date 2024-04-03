@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\Api\DonationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
@@ -29,7 +30,8 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('/cities', [MainController::class, 'getAllCities']);
 
         // Profile Routes
-        Route::match(['get', 'post'], '/edit-profile', [ProfileController::class, 'updateProfile']);
+        Route::post('/edit-profile', [ProfileController::class, 'updateProfile']);
+        Route::get('/show-profile', [ProfileController::class, 'getProfile']);
 
         // Notification Settings Routes
         Route::get('/get-notification-settings', [ProfileController::class, 'getNotificationSettings']);
@@ -42,6 +44,16 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('filter-post-by-category', [PostController::class, 'filterByCategory']);
         Route::post('toggle-post', [PostController::class, 'postToggleFavourite']);
         Route::get('list-favourites', [PostController::class, 'getAllFavourites']);
+
+
+
+        // Donation Routes
+        Route::post('create-donation-request', [DonationController::class, 'createDonationRequest']);
+        Route::get('donation-requests', [DonationController::class, 'getAllDonationRequests']);
+        Route::get('filter-requests', [DonationController::class, 'filterDonationRequestsByBloodType']);
+
+        Route::post('store-fcm-token', [AuthController::class, 'storeFcmToken']);
+
 
 
         Route::get('/logout', [AuthController::class, 'logout']);

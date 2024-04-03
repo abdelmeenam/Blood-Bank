@@ -19,7 +19,6 @@ class PostResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-
         $userId = $request->user()->id;
 
         return [
@@ -29,7 +28,6 @@ class PostResource extends JsonResource
             'content' => $this->content,
             'liked' => $this->clients->contains('id', $userId),
             'category' => new CategoryResource($this->category),
-
         ];
     }
 }

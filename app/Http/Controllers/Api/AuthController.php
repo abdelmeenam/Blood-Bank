@@ -22,6 +22,7 @@ class AuthController extends Controller
 
     public function register(RegisterRequest $request)
     {
+        /*
         $rules = [
             'name' => 'required|max:255',
             'email' => 'required|email|unique:clients,email',
@@ -37,7 +38,7 @@ class AuthController extends Controller
         if ($validator->fails()) {
             return apiResponse(422, $validator->errors());
         }
-
+    */
 
         $request['password'] = Hash::make($request['password']);
         $client = Client::create($request->all());
@@ -50,7 +51,6 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request)
     {
-
         if (!Auth::guard('clients-api')->attempt(['phone' => $request->phone, 'password' => $request->password])) {
             return apiResponse(401, 'Invalid credentials');
         }
@@ -71,16 +71,17 @@ class AuthController extends Controller
     public function forgetPassword(Request $request)
     {
         $rules = [
-            'email' => 'required|email|exists:clients,email',
+            'phone' => 'required|regex:/^\+20\d{10}$/|exists:clients,phone',
+
         ];
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
             return apiResponse(422, $validator->errors());
         }
 
-        $client = Client::where('email', $request->email)->first();
+        $client = Client::where('phone', $request->phone)->first();
         if ($client) {
-            $client->pin_code = rand(1111, 9999);
+            $client->pin_code  = rand(1111, 9999);
             $client->save();
 
             $data = [
@@ -120,5 +121,17 @@ class AuthController extends Controller
         }
 
         return apiResponse(422, 'Invalid code');
+    }
+
+
+    public function storeFcmToken(Request $request)
+    {
+        $request->validate([
+            'fcm_token' => 'required|string',
+        ]);
+
+        $client = auth()->user();
+        $client->update(['fcm_token' => $request->fcm_token]);
+        return response()->json(['message' => 'FCM token stored successfully']);
     }
 }

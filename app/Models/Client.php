@@ -2,24 +2,26 @@
 
 namespace App\Models;
 
+use App\Models\FcmToken;
 use App\Models\BloodType;
 use App\Models\ClientPost;
 use App\Models\DonationRequest;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 
 class Client extends Authenticatable
 {
-    use HasFactory, HasApiTokens;
+    use HasFactory, HasApiTokens, Notifiable;
 
     protected $fillable = [
-        'name', 'email', 'password', 'phone', 'dob', 'last_donation_date', 'blood_type_id', 'city_id', 'date_of_birth', 'pin_code', 'api_token'
+        'name', 'email', 'password', 'phone', 'dob', 'last_donation_date', 'blood_type_id', 'city_id', 'date_of_birth', 'pin_code', 'api_token', 'governorate_id'
     ];
 
     protected $hidden = [
-        'password', 'api_token', 'pin_code'
+        'password', 'api_token', 'pin_code', 'pin_code_expires_at'
     ];
 
     //client belongs to a blood type
@@ -59,5 +61,16 @@ class Client extends Authenticatable
     public function governorates()
     {
         return $this->belongsToMany(Governorate::class, 'client_governorate', 'client_id', 'governorate_id', 'id', 'id');
+    }
+
+    // client has many fcm tokens
+    public function fcmTokens()
+    {
+        return $this->hasMany(FcmToken::class);
+    }
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
     }
 }

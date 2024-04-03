@@ -21,7 +21,7 @@ class PostSeeder extends Seeder
         $categoryIds = range(2, 11); // Assuming you have 10 categories
 
         // Loop to generate fake medical posts
-        for ($i = 0; $i < 10; $i++) { // Generate 50 posts
+        for ($i = 0; $i < 5; $i++) { // Generate 50 posts
             $title = $faker->sentence();
             $image = $faker->imageUrl();
             $content = $faker->realText(1000); // Generate Arabic medical content with 1000 characters

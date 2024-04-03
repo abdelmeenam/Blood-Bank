@@ -14,8 +14,21 @@ class DonationRequest extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'age', 'bags_number', 'hospital_name', 'hospital_address', 'phone', 'notes', 'latitude', 'longitude', 'city_id', 'blood_type_id', 'client_id'
+        'patient_name', 'patient_age', 'bags_count', 'patient_phone', 'notes',
+        'latitude', 'longitude', 'blood_type_id', 'client_id', 'city_id',
+        'hospital_name', 'hospital_address'
+
     ];
+
+
+    protected static function booted()
+    {
+        /*
+        static::creating(function (DonationRequest $DonationRequest) {
+            $DonationRequest->client_id = auth()->id();
+        });
+        */
+    }
 
     // donation request belongs to a city
     public function city()
