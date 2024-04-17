@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\AuthRequests\LoginRequest;
 use App\Http\Requests\AuthRequests\RegisterRequest;
 use Twilio\Rest\Client as TwilioClient; // Import TwilioClient
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
@@ -40,7 +41,7 @@ class AuthController extends Controller
         }
     */
 
-        $request['password'] = Hash::make($request['password']);
+        //$request['password'] = Hash::make($request['password']);
         $client = Client::create($request->all());
 
         return apiResponse(200, 'Client created successfully', [
@@ -121,17 +122,5 @@ class AuthController extends Controller
         }
 
         return apiResponse(422, 'Invalid code');
-    }
-
-
-    public function storeFcmToken(Request $request)
-    {
-        $request->validate([
-            'fcm_token' => 'required|string',
-        ]);
-
-        $client = auth()->user();
-        $client->update(['fcm_token' => $request->fcm_token]);
-        return response()->json(['message' => 'FCM token stored successfully']);
     }
 }

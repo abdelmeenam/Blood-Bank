@@ -27,7 +27,7 @@ class RegisterRequest extends FormRequest
         return [
             'name' => 'required|max:255',
             'email' => 'required|email|unique:clients,email',
-            'phone' => 'required|regex:/^\+20\d{10}$/|unique:clients,phone',
+            'phone' => 'required|digits:11|unique:clients,phone',
             'password' => 'required|confirmed|min:6',
             'date_of_birth' => 'required|date',
             'last_donation_date' => 'required|date',

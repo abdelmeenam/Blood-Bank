@@ -52,7 +52,7 @@ Route::group(['prefix' => 'v1'], function () {
         Route::get('donation-requests', [DonationController::class, 'getAllDonationRequests']);
         Route::get('filter-requests', [DonationController::class, 'filterDonationRequestsByBloodType']);
 
-        Route::post('store-fcm-token', [AuthController::class, 'storeFcmToken']);
+        Route::post('store-fcm-token', [DonationController::class, 'storeFcmToken']);
 
 
 
