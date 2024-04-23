@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\City;
 use App\Models\Client;
+use App\Models\FcmToken;
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 
+use Illuminate\Http\Request;
 use App\Mail\SendCodeResetPassword;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -16,7 +18,6 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\AuthRequests\LoginRequest;
 use App\Http\Requests\AuthRequests\RegisterRequest;
 use Twilio\Rest\Client as TwilioClient; // Import TwilioClient
-use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
@@ -122,5 +123,32 @@ class AuthController extends Controller
         }
 
         return apiResponse(422, 'Invalid code');
+    }
+
+    public function storeFcmToken(Request $request)
+    {
+        $request->validate([
+            'fcm_token' => 'required|string',
+        ]);
+
+        $existingToken = FcmToken::where('token', $request->fcm_token)->first();
+        if ($existingToken && $existingToken->user_id !== $request->user()->id) {
+            $existingToken->delete();
+        }
+
+        $request->user()->fcmTokens()->create(['token' => $request->fcm_token]);
+        return response()->json(['message' => 'FCM token stored successfully']);
+    }
+
+    public function removeFcmToken(Request $request)
+    {
+        $request->validate([
+            'fcm_token' => 'required|string',
+        ]);
+
+
+        $request->user()->fcmTokens()->where('token', $request->fcm_token)->delete();
+
+        return response()->json(['message' => 'FCM token removed successfully']);
     }
 }

@@ -46,48 +46,36 @@ class DonationController extends Controller
         return $donations;
     }
 
-
-
     public function createDonationRequest(CreateDonationRequest $request)
     {
         $donationRequest = $request->user()->donationRequests()->create($request->all());
         $matchingClients = $this->findMatchingClients($donationRequest);
-        /*
-        $notification = $donationRequest->notifications()->create([
-            'title' => 'يوجد طلب تبرع جديد',
-            'content' => 'يوجد طلب تبرع جديد بفصيلة دم ' . $donationRequest->bloodType->name . ' في مدينة ' . $donationRequest->city->name . ' والمحافظة ' . $donationRequest->city->governorate->name . ',
-        ]);
-        $notification->clients()->attach($matchingClients);
-        */
-        $registrationIds = $this->getClientFcmTokens($donationRequest);
-        dd($registrationIds, $matchingClients);
-
-        $registrationTokens = new RegistrationTokens($registrationIds);
-
-        foreach ($registrationIds as $token) {
-            $this->sendNotification($token, $donationRequest);
+        $tokens = FcmToken::whereIn('client_id', $matchingClients)->whereNotNull('token')->pluck('token')->toArray();
+        // Create notification for matching clients
+        if (count($matchingClients) > 0) {
+            $donationRequest->notification()->create([
+                'title' => 'أحتاج متبرع',
+                'content' => ' أحتاج متبرع بفصيلة دم  ' . $donationRequest->bloodType->name . ' في مدينة ' . $donationRequest->city->name . ' بمحافظة ' . $donationRequest->city->governorate->name . '',
+            ])->clients()->attach($matchingClients);
+        }
+        // Send notification to matching clients
+        if (count($tokens) > 0) {
+            $title = $donationRequest->notification->title;
+            $content = $donationRequest->notification->content;
+            $data = [
+                'action' => 'new notify',
+                'data' => null,
+                'client' => 'client',
+                'title' => $title,
+                'content' => $content,
+                'donation_request_id' => $donationRequest->id
+            ];
+            $result = notifyByFirebase($title, $content, $tokens, $data);
+            //info("Notification result: $result");
         }
 
-        return apiResponse(200, "success", $donationRequest);
+        return apiResponse(200, "تم الاضافة بنجاح", $donationRequest);
     }
-
-
-
-    private function sendNotification($fcmToken, DonationRequest $donationRequest)
-    {
-        $firebase = (new Factory)->withServiceAccount(config('services.firebase.credentials.file'));
-        $messaging = $firebase->createMessaging();
-        $message = CloudMessage::withTarget('token', $fcmToken)
-            ->withNotification(Notification::create('New Donation Request', 'A new donation request has been submitted'))
-            ->withData([
-                'donation_request_id' => $donationRequest->id,
-                'blood_type_id' => $donationRequest->blood_type_id,
-                'governorate_id' => $donationRequest->governorate_id,
-                'city_id' => $donationRequest->city_id,
-            ]);
-        $messaging->send($message);
-    }
-
 
 
     private function findMatchingClients(DonationRequest $donationRequest)
@@ -99,6 +87,8 @@ class DonationController extends Controller
         })->pluck('id')->toArray();
     }
 
+
+    /**
     private function getClientFcmTokens(DonationRequest $donationRequest)
     {
         $tokens = FcmToken::whereNotNull('token') // Exclude null tokens
@@ -114,16 +104,9 @@ class DonationController extends Controller
         return $tokens;
     }
 
-    public function storeFcmToken(Request $request)
-    {
-        $request->validate([
-            'fcm_token' => 'required|string',
-        ]);
-        /*
-        auth()->user()->fcmTokens()->updateOrCreate([
-            'token' => $request->fcm_token,
-        ]);
-        return response()->json(['message' => 'FCM token stored successfully']);
-        */
-    }
+            $registeredToken = [
+            'fNL3fhAHTyycJ3STDwhaKz:APA91bFrHKYZXvSshdmv8P3dL0FZ3D_4MwsDJkrfFb-YMIKygDnwaRrHzk4GJgBhZfyD7reFFWNYvKMobAmoxpKuBwTV_WIEKP5Q_RzSRSGAqVzZDoLpzeu4sgUF696s0XzcYqH-u72C',
+            'fGzj4cLwRJ2a36HAYfC5IL:APA91bG0XTshQa46kJ1GDCF4gI5BXMmMjx56AsayT0OhWaSnzS3KGf2IjqbAo7VPNzJpu6wTAT_uDP9F6LRiQLOXjYE8tUm29RQ30YqQfC0V0Oj65fGab84psNIIREFpUKg819Cjnh4c',
+        ];
+     */
 }

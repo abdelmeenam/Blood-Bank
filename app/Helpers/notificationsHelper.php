@@ -1,18 +1,12 @@
 <?php
 
-use App\Models\Client;
-use App\Models\User;
-use Illuminate\Support\Facades\Request;
 
 /*
 function sendNotification(Request $request)
 {
     $url = 'https://fcm.googleapis.com/fcm/send';
-
     $FcmToken = Client::whereNotNull('device_token')->pluck('device_token')->all();
-
     $serverKey = 'AAAA6MPweDU:APA91bGUqL4b9sXCASfgpsosKciBjfBL5tXnZSwFrZXixulGP1iSC8FXDj8N-31gMTCQyw-u2mObNYTSqhKf9D1EYoz-hYDnj9bv3h2WQQHkzHhWGmdUUSObotJZsL7hHLu_vG1QuNBR'; // ADD SERVER KEY HERE PROVIDED BY FCM
-
     $data = [
         "registration_ids" => $FcmToken,
         "notification" => [
@@ -48,64 +42,56 @@ function sendNotification(Request $request)
     // FCM response
     dd($result);
 }
+// using package
+function sendNotification($fcmToken, DonationRequest $donationRequest)
+{
+    $firebase = (new Factory)->withServiceAccount(config('services.firebase.credentials.file'));
+    $messaging = $firebase->createMessaging();
+    $message = CloudMessage::withTarget('token', $fcmToken)
+        ->withNotification(Notification::create('New Donation Request', 'A new donation request has been submitted'))
+        ->withData([
+            'donation_request_id' => $donationRequest->id,
+            'blood_type_id' => $donationRequest->blood_type_id,
+            'governorate_id' => $donationRequest->governorate_id,
+            'city_id' => $donationRequest->city_id,
+        ]);
+    $messaging->send($message);
+}
 
+*/
 
-
-function send_notification_FCM($notification_id, $title, $message, $id, $type)
+//Server key : AAAAc2sFOhQ:APA91bEL9vB8iv7deZol6CqxjGXspbIs-tE5VUinVejenfaeEwvU6wpBCOonTSC5Ohugx56rQEg3lGLmz_DwA1_RbvCMkebvH3XdYvJn-8rldM6QuzLhclpaOiI64EcbJQa9LAl5gm3J
+function notifyByFirebase($title, $body, $tokens, $data = [])        // paramete 5 =>>>> $type
 {
 
-    $accesstoken = env('FCM_KEY');
+    $registrationIDs = $tokens;
 
-    $URL = 'https://fcm.googleapis.com/fcm/send';
+    $fcmMsg = array(
+        'body' => $body,
+        'title' => $title,
+        'sound' => "default",
+        'color' => "#203E78"
+    );
 
-    $post_data = '{
-            "to" : "' . $notification_id . '",
-            "data" : {
-              "body" : "",
-              "title" : "' . $title . '",
-              "type" : "' . $type . '",
-              "id" : "' . $id . '",
-              "message" : "' . $message . '",
-            },
-            "notification" : {
-                 "body" : "' . $message . '",
-                 "title" : "' . $title . '",
-                  "type" : "' . $type . '",
-                 "id" : "' . $id . '",
-                 "message" : "' . $message . '",
-                "icon" : "new",
-                "sound" : "default"
-                },
+    $fcmFields = array(
+        'registration_ids' => $registrationIDs,
+        'priority' => 'high',
+        'notification' => $fcmMsg,
+        'data' => $data
+    );
+    $headers = array(
+        'Authorization: key=' . env('FIREBASE_API_ACCESS_KEY'),
+        'Content-Type: application/json'
+    );
 
-          }';
-    // print_r($post_data);die;
-
-    $crl = curl_init();
-
-    $headr = array();
-    $headr[] = 'Content-type: application/json';
-    $headr[] = 'Authorization: ' . $accesstoken;
-    curl_setopt($crl, CURLOPT_SSL_VERIFYPEER, false);
-
-    curl_setopt($crl, CURLOPT_URL, $URL);
-    curl_setopt($crl, CURLOPT_HTTPHEADER, $headr);
-
-    curl_setopt($crl, CURLOPT_POST, true);
-    curl_setopt($crl, CURLOPT_POSTFIELDS, $post_data);
-    curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
-
-    $rest = curl_exec($crl);
-
-    if ($rest === false) {
-        // throw new Exception('Curl error: ' . curl_error($crl));
-        //print_r('Curl error: ' . curl_error($crl));
-        $result_noti = 0;
-    } else {
-
-        $result_noti = 1;
-    }
-
-    //curl_close($crl);
-    //print_r($result_noti);die;
-    return $result_noti;
-}*/
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fcmFields));
+    $result = curl_exec($ch);
+    curl_close($ch);
+    return $result;
+}

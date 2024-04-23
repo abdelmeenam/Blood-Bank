@@ -30,7 +30,8 @@
         }
         ,
         "files":[
-            "App/Helpers/apiHelper.php"
+            "App/Helpers/apiHelper.php",
+            "App/Helpers/notificationsHelper.php"
         ]
     },
     "autoload-dev": {

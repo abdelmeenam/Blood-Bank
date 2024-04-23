@@ -45,16 +45,12 @@ Route::group(['prefix' => 'v1'], function () {
         Route::post('toggle-post', [PostController::class, 'postToggleFavourite']);
         Route::get('list-favourites', [PostController::class, 'getAllFavourites']);
 
-
-
         // Donation Routes
         Route::post('create-donation-request', [DonationController::class, 'createDonationRequest']);
         Route::get('donation-requests', [DonationController::class, 'getAllDonationRequests']);
         Route::get('filter-requests', [DonationController::class, 'filterDonationRequestsByBloodType']);
-
-        Route::post('store-fcm-token', [DonationController::class, 'storeFcmToken']);
-
-
+        Route::post('store-fcm-token', [AuthController::class, 'storeFcmToken']);
+        Route::post('remove-fcm-token', [AuthController::class, 'removeFcmToken']);
 
         Route::get('/logout', [AuthController::class, 'logout']);
     });
