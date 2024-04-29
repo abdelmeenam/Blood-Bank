@@ -1,5 +1,13 @@
-api/v1/notifications     (based on your setting)
-api/v1/create-donation-request
+Admin dashboard tasks
+=====================
+- Governorate Module    done
+- Cities Module     done
+- Categories    done
+- Posts
+- Clients [showAllClients&Filter - delete - Active/InActive]    //f
 
-api/v1/donation-requests (filter by governorate ,blood_type)
 
+
+// Git commands
+git branch -v               : list all branches with the last commit
+git checkout <branch_name>  : Switch to branch_name

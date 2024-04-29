@@ -18,11 +18,11 @@ class CustomSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            BloodTypesSeeder::class,
-            CategorySeeder::class,
+            // BloodTypesSeeder::class,
+            //CategorySeeder::class,
             GovernoratesSeeder::class,
-            PostSeeder::class,
-            CitiesSeeder::class,
+            //PostSeeder::class,
+            //CitiesSeeder::class,
         ]);
     }
 }

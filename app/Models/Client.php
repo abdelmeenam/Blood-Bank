@@ -17,7 +17,7 @@ class Client extends Authenticatable
     use HasFactory, HasApiTokens, Notifiable;
 
     protected $fillable = [
-        'name', 'email', 'password', 'phone', 'dob', 'last_donation_date', 'blood_type_id', 'city_id', 'date_of_birth', 'pin_code', 'api_token', 'governorate_id'
+        'name', 'email', 'password', 'phone', 'date_of_birth', 'last_donation_date', 'blood_type_id', 'city_id', 'date_of_birth', 'pin_code', 'api_token', 'governorate_id'
     ];
 
     protected $hidden = [
@@ -72,5 +72,17 @@ class Client extends Authenticatable
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);
+    }
+
+    //client belongs to a city
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
+
+    //client belongs to a governorate
+    public function governorate()
+    {
+        return $this->belongsTo(Governorate::class);
     }
 }

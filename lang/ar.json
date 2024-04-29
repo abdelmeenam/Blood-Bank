@@ -1,0 +1,31 @@
+{
+"Dashboard" : "لوحة التحكم",
+"Governorates" : "المحافظات",
+"Governorates List" : "قائمة المحافظات",
+"Add Governorate" : "إضافة محافظة",
+"Update Governorate" : "تحديث المحافظة",
+
+"Governorate Name (Arabic)" : "اسم المحافظة (بالعربية)",
+"Governorate Name (English)" : "اسم المحافظة (بالإنجليزية)",
+"Processes" : "العمليات" ,
+"Governorate has been added successfully" : "تمت إضافة المحافظة بنجاح",
+"Governorate Ar Name" : "اسم المحافظة بالعربية",
+"Governorate En Name" : "اسم المحافظة بالإنجليزية",
+"Edit Governorate" : "تعديل المحافظة",
+"Governorate has been updated successfully" : "تم تحديث المحافظة بنجاح",
+"Delete Governorate" : "حذف المحافظة",
+"Governorate has been deleted successfully" : "تم حذف المحافظة بنجاح",
+"Cancel" : "إلغاء",
+"Governorate name" : "اسم المحافظة" ,
+"Governorate en name is required" : "اسم المحافظة بالإنجليزية مطلوب",
+"Governorate ar name is required" : "اسم المحافظة بالعربية مطلوب",
+"Governorate name en must be a string" : "اسم المحافظة بالإنجليزية يجب أن يكون نص",
+"Governorate name ar must be a string" : "اسم المحافظة بالعربية يجب أن يكون نص",
+"Governorate name en must be less than 255 characters" : "اسم المحافظة بالإنجليزية يجب أن يكون أقل من 255 حرف",
+"Governorate name ar must be less than 255 characters" : "اسم المحافظة بالعربية يجب أن يكون أقل من 255 حرف",
+"Governorate name is already exist" : "اسم المحافظة موجود بالفعل",
+"Do you wanna delete" : "هل تريد حذف" ,
+"?" : "؟",
+"Delete" : "حذف"
+
+}

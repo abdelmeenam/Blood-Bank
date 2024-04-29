@@ -14,7 +14,7 @@ class GovernoratesSeeder extends Seeder
     public function run(): void
     {
         $governorates = [
-            ['name' => 'القاهرة'],
+            //['name' => 'القاهرة'],
             ['name' => 'الإسكندرية'],
             ['name' => 'الجيزة'],
             ['name' => 'الدقهلية'],
@@ -25,7 +25,7 @@ class GovernoratesSeeder extends Seeder
             ['name' => 'الإسماعيلية'],
             ['name' => 'المنوفية'],
             ['name' => 'المنيا'],
-            ['name' => 'القليوبية'],
+            // ['name' => 'القليوبية'],
             ['name' => 'الوادي الجديد'],
             ['name' => 'السويس'],
             ['name' => 'اسوان'],
