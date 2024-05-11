@@ -15,24 +15,37 @@ class ClientController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //get all clients with blood type name and city name and governorate name is_active
-        $clients = Client::with('bloodType:id,name', 'city:id,name', 'governorate:id,name')->get();
         $bloodTypes = BloodType::all();
         $cities = City::all();
         $governorates = Governorate::all();
+        $clientsQuery = Client::with('bloodType:id,name', 'city:id,name', 'governorate:id,name');
 
+        if (request()->has('status')) {
+            $clientsQuery->byStatus(request()->status);
+        }
 
+        $clients = $clientsQuery->paginate(4);
         return view('AdminDashboard.Clients.clients', compact('clients', 'bloodTypes', 'cities', 'governorates'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function searchClients(Request $request)
     {
-        //
+        $bloodTypes = BloodType::all();
+        $cities = City::all();
+        $governorates = Governorate::all();
+        $search = $request->input('search');
+
+        if ($search) {
+            $clients = Client::search($search)->paginate(4);
+        }
+
+
+        return view('AdminDashboard.Clients.clients', compact('clients', 'bloodTypes', 'cities', 'governorates'));
     }
 
     /**
@@ -40,7 +53,6 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-
 
         try {
             $rules = [
@@ -108,5 +120,15 @@ class ClientController extends Controller
         $client->is_active = $request->input('is_active');
         $client->save();
         return response()->json(['status' => true, 'message' => __('Client status has been changed successfully')]);
+    }
+
+    //filter clients by status
+    public function filterClients(Request $request)
+    {
+        $clients = Client::where('is_active', $request->status)->get();
+        $bloodTypes = BloodType::all();
+        $cities = City::all();
+        $governorates = Governorate::all();
+        return view('AdminDashboard.Clients.clients', compact('clients', 'bloodTypes', 'cities', 'governorates'));
     }
 }

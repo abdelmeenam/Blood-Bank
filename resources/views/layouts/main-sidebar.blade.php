@@ -87,6 +87,49 @@
                             </ul>
                         </li>
 
+
+                        <li>
+                            <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements5">
+                                <div class="pull-left"><i class="ti-palette"></i><span
+                                        class="right-nav-text">{{ __('Contacts') }}</span></div>
+                                <div class="pull-right"><i class="ti-plus"></i></div>
+                                <div class="clearfix"></div>
+                            </a>
+                            <ul id="elements5" class="collapse" data-parent="#sidebarnav">
+                                <li><a href="{{ route('contacts.index') }}">{{ __('Contacts List') }}</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements6">
+                                <div class="pull-left"><i class="ti-palette"></i><span
+                                        class="right-nav-text">{{ __('Donations') }}</span></div>
+                                <div class="pull-right"><i class="ti-plus"></i></div>
+                                <div class="clearfix"></div>
+                            </a>
+                            <ul id="elements6" class="collapse" data-parent="#sidebarnav">
+                                <li><a href="{{ route('donations.index') }}">{{ __('Donations List') }}</a>
+                                </li>
+                            </ul>
+                        </li>
+
+
+                        <li>
+                            <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements7">
+                                <div class="pull-left"><i class="ti-palette"></i><span
+                                        class="right-nav-text">{{ __('Settings') }}</span></div>
+                                <div class="pull-right"><i class="ti-plus"></i></div>
+                                <div class="clearfix"></div>
+                            </a>
+                            <ul id="elements7" class="collapse" data-parent="#sidebarnav">
+                                <li><a href="{{ route('settings.index') }}">{{ __('Settings List') }}</a>
+                                </li>
+                            </ul>
+                        </li>
+
+
+
                     </ul>
                 </div>
             </div>

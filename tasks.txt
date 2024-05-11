@@ -1,13 +1,11 @@
 Admin dashboard tasks
 =====================
-- Governorate Module    done
-- Cities Module     done
-- Categories    done
-- Posts
-- Clients [showAllClients&Filter - delete - Active/InActive]    //f
+- settings module [only edit]
+- change password page for admin
 
+- users module - roles module - Spatie
 
-
-// Git commands
+//-----------Git commands------------------
 git branch -v               : list all branches with the last commit
 git checkout <branch_name>  : Switch to branch_name
+git push --set-upstream origin AdminDashboard

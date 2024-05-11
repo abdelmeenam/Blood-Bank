@@ -22,7 +22,6 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -30,7 +29,18 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+        ], [
+            'name.required' => __('Category name is required'),
+            'name.string' => __('Category name must be string'),
+            'name.max' => __('Category name must be less than 255 characters'),
+        ]);
+
+        Category::create($request->all());
+        // Redirect to the categories page with success message and toastr notification
+        toastr()->success(__('Category has been added successfully'));
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -62,6 +72,11 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        //delete the category
+        $category = Category::findOrFail($id);
+        $category->delete();
+        // Redirect to the categories page with success message and toastr notification
+        toastr()->success(__('Category has been deleted successfully'));
+        return redirect()->route('categories.index');
     }
 }

@@ -17,7 +17,6 @@ class DonationRequest extends Model
         'patient_name', 'patient_age', 'bags_count', 'patient_phone', 'notes',
         'latitude', 'longitude', 'blood_type_id', 'client_id', 'city_id',
         'hospital_name', 'hospital_address'
-
     ];
 
 
@@ -36,6 +35,15 @@ class DonationRequest extends Model
         return $this->belongsTo(City::class);
     }
 
+    // donation request belongs to a governorate
+    public function governorate()
+    {
+        return $this->belongsTo(Governorate::class);
+    }
+
+
+
+
     // donation request belongs to a blood type
     public function bloodType()
     {
@@ -48,9 +56,17 @@ class DonationRequest extends Model
         return $this->belongsTo(Client::class);
     }
 
+
+
     // donation request has one notification
     public function notification()
     {
         return $this->hasOne(Notification::class);
+    }
+
+    // donation request has many notifications
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
     }
 }

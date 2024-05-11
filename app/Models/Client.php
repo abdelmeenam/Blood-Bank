@@ -5,9 +5,11 @@ namespace App\Models;
 use App\Models\FcmToken;
 use App\Models\BloodType;
 use App\Models\ClientPost;
+use Laravel\Scout\Searchable;
 use App\Models\DonationRequest;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -16,6 +18,20 @@ class Client extends Authenticatable
 {
     use HasFactory, HasApiTokens, Notifiable;
 
+    /**
+    use Searchable {
+        Searchable::search as parentSearch;
+    }*/
+
+    /**
+    public static function search($query = '', $callback = null)
+    {
+        return static::parentSearch($query, $callback)->query(function ($builder) {
+            $builder->join('cities', 'clients.city_id', '=', 'cities.id');
+        });
+    }
+     */
+
     protected $fillable = [
         'name', 'email', 'password', 'phone', 'date_of_birth', 'last_donation_date', 'blood_type_id', 'city_id', 'date_of_birth', 'pin_code', 'api_token', 'governorate_id'
     ];
@@ -23,6 +39,51 @@ class Client extends Authenticatable
     protected $hidden = [
         'password', 'api_token', 'pin_code', 'pin_code_expires_at'
     ];
+
+
+    // Filter clients by status
+    public function scopeByStatus($query, $status)
+    {
+        return $query->where('is_active', $status);
+    }
+
+
+
+    public function scopeSearch($query, $searchQuery)
+    {
+        return $query->where(function ($queryBuilder) use ($searchQuery) {
+            $queryBuilder->where('name', 'LIKE', "%$searchQuery%")
+                ->orWhere('email', 'LIKE', "%$searchQuery%")
+                ->orWhere('phone', 'LIKE', "%$searchQuery%")
+                ->orWhereHas('bloodType', function ($q) use ($searchQuery) {
+                    $q->where('name', 'LIKE', "%$searchQuery%");
+                })
+                ->orWhereHas('city', function ($q) use ($searchQuery) {
+                    $q->where('name', 'LIKE', "%$searchQuery%");
+                })
+                ->orWhereHas('governorate', function ($q) use ($searchQuery) {
+                    $q->where('name', 'LIKE', "%$searchQuery%");
+                });
+        });
+    }
+
+    /*
+
+    public function toSearchableArray()
+    {
+        $array = $this->toArray();
+        $array = $this->transform($array);
+        $array['cities'] = $this->cities->map(function ($data) {
+            return $data['name'];
+        })->toArray();
+        return $array;
+    }
+
+
+
+    */
+
+
 
     //client belongs to a blood type
     public function bloodType()

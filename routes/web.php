@@ -3,11 +3,15 @@
 use App\Http\Controllers\AdminDashboard\CategoryController;
 use App\Http\Controllers\AdminDashboard\CityController;
 use App\Http\Controllers\AdminDashboard\ClientController;
+use App\Http\Controllers\AdminDashboard\ContactController;
+use App\Http\Controllers\AdminDashboard\DonationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\AdminDashboard\GovernorateController;
 use App\Http\Controllers\AdminDashboard\PostController;
+use App\Http\Controllers\AdminDashboard\SettingController;
+use App\Models\Contact;
 
 Route::get('/', function () {
     return view('welcome');
@@ -27,8 +31,14 @@ Route::group(
         Route::resource('posts', PostController::class);
         Route::resource('clients', ClientController::class);
         Route::resource('categories', CategoryController::class);
+        Route::resource('contacts', ContactController::class);
+        Route::resource('donations', DonationController::class);
+        Route::resource('settings', SettingController::class);
+
         Route::get('/get-cities/{governorateId}', [CityController::class, 'getCities'])->name('get-cities');
         Route::post('/update-user-status/{userId}', [ClientController::class, 'updateUserStatus'])->name('update-user-status');
+
+        Route::get('/search-clients', [ClientController::class, 'searchClients'])->name('search-clients');
 
 
 

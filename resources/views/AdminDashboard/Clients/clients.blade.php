@@ -31,10 +31,28 @@
                     </div>
                 @endif
 
+
                 <button type="button" class="button x-small" data-toggle="modal" data-target="#exampleModal">
                     {{ trans('Add Client') }}
                 </button>
                 <br><br>
+
+                <form action="{{ route('clients.index') }}" method="get" style="display: inline">
+                    <select class="selectpicker" data-style="btn-info" name="status" required
+                        onchange="this.form.submit()">
+                        <option value="" selected disabled>{{ __('Filter Clients') }}</option>
+                        </option>
+                        <option value="1">Active Clients</option>
+                        <option value="0">In Active Clients</option>
+                    </select>
+                </form>
+
+                <form action="{{ route('search-clients') }}" method="get" style="display: inline">
+                    <input type="text" name="search" placeholder="Search...">
+                    <button type="submit">Search</button>
+                </form>
+
+
 
                 <div class="table-responsive">
                     <table id="datatable" class="table  table-hover table-sm table-bordered p-0" data-page-length="50"
@@ -162,7 +180,8 @@
                                                             <label for="blood_type_id"
                                                                 class="mr-sm-2">{{ __('blood type') }}
                                                                 :</label>
-                                                            <select name="blood_type_id" class="form-control" required>
+                                                            <select name="blood_type_id" class="form-control"
+                                                                required>
                                                                 @foreach ($bloodTypes as $bloodType)
                                                                     <option value="{{ $bloodType->id }}"
                                                                         {{ $client->blood_type_id == $bloodType->id ? 'selected' : '' }}>
@@ -248,6 +267,7 @@
                                 </div>
                 </div>
 
+
                 <!-- delete_modal -->
                 <div class="modal fade" id="delete{{ $client->id }}" tabindex="-1" role="dialog"
                     aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -281,6 +301,9 @@
                 @endforeach
                 </table>
 
+            </div>
+            <div class="d-flex justify-content-center">
+                {{ $clients->links() }}
             </div>
         </div>
     </div>
@@ -349,7 +372,7 @@
                         <div class="col">
                             <label for="governorate_id" class="mr-sm-2">{{ __('Governorate') }} :</label>
                             <select name="governorate_id" class="form-control" id="governorate_id">
-                                <option value="0">{{ __('Select Governorate') }}</option>
+                                <option value="" selected disabled>{{ __('Select Governorate') }}</option>
                                 @foreach ($governorates as $governorate)
                                     <option value="{{ $governorate->id }}">{{ $governorate->name }}</option>
                                 @endforeach
@@ -358,7 +381,7 @@
                         <div class="col">
                             <label for="city_id" class="mr-sm-2">{{ __('city') }} :</label>
                             <select name="city_id" class="form-control" id="city_id">
-                                <option value="">{{ __('Select city') }}</option>
+                                <option value="" selected disabled>{{ __('Select city') }}</option>
                             </select>
                         </div>
                     </div>
@@ -458,7 +481,7 @@
     });
 </script>
 
-<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+{{-- <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script> --}}
 
 @toastr_js
 @toastr_render

@@ -6,6 +6,7 @@
 @stop
 @endsection
 @section('page-header')
+
 <!-- breadcrumb -->
 @section('PageTitle')
     {{ trans('Cities') }}
