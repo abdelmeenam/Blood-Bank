@@ -2,64 +2,37 @@
 
 namespace App\Http\Controllers\AdminDashboard;
 
-use App\Http\Controllers\Controller;
+use App\Models\Setting;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class SettingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function editSetting()
     {
-        //
+        $setting = Setting::first();
+        return view('AdminDashboard.settings.edit', compact('setting'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function updateSetting(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'email' => 'sometimes|email|max:255',
+            'phone' => 'sometimes|string|max:20',
+            'notification_settings_text' => 'sometimes|string|max:255',
+            'about_app' => 'sometimes|string|max:255',
+            'insta_link' => 'nullable|url|max:255',
+            'youtube_link' => 'nullable|url|max:255',
+            'whatsapp_link' => 'nullable|url|max:255',
+            'google_link' => 'nullable|url|max:255',
+            'fb_link' => 'nullable|url|max:255',
+            'tw_link' => 'nullable|url|max:255',
+        ]);
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        $setting = Setting::first();
+        $setting->update($request->all());
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        toastr()->success(__('Settings updated successfully'));
+        return redirect()->route('settings.edit');
     }
 }

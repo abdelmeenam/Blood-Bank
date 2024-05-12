@@ -1,8 +1,5 @@
 Admin dashboard tasks
 =====================
-- settings module [only edit]
-- change password page for admin
-
 - users module - roles module - Spatie
 
 //-----------Git commands------------------

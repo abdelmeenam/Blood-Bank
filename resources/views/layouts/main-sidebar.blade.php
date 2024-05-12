@@ -123,7 +123,7 @@
                                 <div class="clearfix"></div>
                             </a>
                             <ul id="elements7" class="collapse" data-parent="#sidebarnav">
-                                <li><a href="{{ route('settings.index') }}">{{ __('Settings List') }}</a>
+                                <li><a href="{{ route('admin.settings.edit') }}">{{ __('Settings List') }}</a>
                                 </li>
                             </ul>
                         </li>
