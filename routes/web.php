@@ -12,6 +12,7 @@ use App\Http\Controllers\AdminDashboard\CategoryController;
 use App\Http\Controllers\AdminDashboard\DonationController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\AdminDashboard\GovernorateController;
+use App\Http\Controllers\AdminDashboard\AdminController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -38,6 +39,7 @@ Route::group(
         Route::resource('categories', CategoryController::class);
         Route::resource('contacts', ContactController::class);
         Route::resource('donations', DonationController::class);
+        Route::resource('admins', AdminController::class);
 
         // Edit Settings
         Route::get('/settings/edit', [SettingController::class, 'editSetting'])->name('admin.settings.edit');

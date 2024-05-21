@@ -11,7 +11,9 @@ class SettingController extends Controller
     public function editSetting()
     {
         $setting = Setting::first();
-        return view('AdminDashboard.settings.edit', compact('setting'));
+        return view('AdminDashboard.Settings.edit', [
+            'setting' => $setting ?? new Setting()
+        ]);
     }
 
     public function updateSetting(Request $request)

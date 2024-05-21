@@ -118,11 +118,25 @@
                         <li>
                             <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements7">
                                 <div class="pull-left"><i class="ti-palette"></i><span
-                                        class="right-nav-text">{{ __('Settings') }}</span></div>
+                                        class="right-nav-text">{{ __('Admins') }}</span></div>
                                 <div class="pull-right"><i class="ti-plus"></i></div>
                                 <div class="clearfix"></div>
                             </a>
                             <ul id="elements7" class="collapse" data-parent="#sidebarnav">
+                                <li><a href="{{ route('admins.index') }}">{{ __('Admins List') }}</a>
+                                </li>
+                            </ul>
+                        </li>
+
+
+                        <li>
+                            <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements8">
+                                <div class="pull-left"><i class="ti-palette"></i><span
+                                        class="right-nav-text">{{ __('Settings') }}</span></div>
+                                <div class="pull-right"><i class="ti-plus"></i></div>
+                                <div class="clearfix"></div>
+                            </a>
+                            <ul id="elements8" class="collapse" data-parent="#sidebarnav">
                                 <li><a href="{{ route('admin.settings.edit') }}">{{ __('Settings List') }}</a>
                                 </li>
                             </ul>
