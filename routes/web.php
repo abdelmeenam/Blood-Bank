@@ -12,20 +12,11 @@ use App\Http\Controllers\AdminDashboard\CategoryController;
 use App\Http\Controllers\AdminDashboard\DonationController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\AdminDashboard\GovernorateController;
+use App\Http\Controllers\AdminDashboard\UserController;
 
 Route::get('/', function () {
     return view('welcome');
 });
-
-
-/**
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
- */
-
 
 
 Route::group(
@@ -38,6 +29,7 @@ Route::group(
         Route::resource('categories', CategoryController::class);
         Route::resource('contacts', ContactController::class);
         Route::resource('donations', DonationController::class);
+        Route::resource('users', UserController::class);
 
         // Edit Settings
         Route::get('/settings/edit', [SettingController::class, 'editSetting'])->name('admin.settings.edit');
@@ -47,12 +39,12 @@ Route::group(
         Route::get('/admin-profile/edit', [ProfileController::class, 'editProfile'])->name('admin.password.edit');
         Route::put('/admin-profile/update', [ProfileController::class, 'updateProfile'])->name('admin.password.update');
 
+        // Get Cities by Governorate
         Route::get('/get-cities/{governorateId}', [CityController::class, 'getCities'])->name('get-cities');
         Route::post('/update-user-status/{userId}', [ClientController::class, 'updateUserStatus'])->name('update-user-status');
 
+        // Search Clients
         Route::get('/search-clients', [ClientController::class, 'searchClients'])->name('search-clients');
-
-
 
         Route::get('/dashboard', function () {
             return view('dashboard');

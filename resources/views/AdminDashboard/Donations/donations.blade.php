@@ -70,13 +70,18 @@
                                         <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
                                             data-target="#previewDonation{{ $donation->id }}"
                                             title="{{ __('Preview Donation') }}">
-                                            <i class="fa fa-eye"></i> {{ __('Preview') }}
+                                            <i class="fa fa-eye"></i>
                                         </button>
+
                                         <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
                                             data-target="#deleteDonation{{ $donation->id }}"
                                             title="{{ __('Delete Donation') }}">
-                                            <i class="fa fa-trash"></i> {{ __('Delete') }}
+                                            <i class="fa fa-trash"></i>
                                         </button>
+
+
+
+
                                     </td>
                                 </tr>
 

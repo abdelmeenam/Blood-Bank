@@ -7,7 +7,7 @@
                         <!-- menu item Dashboard-->
                         <li>
                             <a href="javascript:void(0);" data-toggle="collapse" data-target="#dashboard">
-                                <div class="pull-left"><i class="ti-home"></i><span {{-- class="right-nav-text">{{ __('main_trans.Dashboard_page') }}</span> --}}
+                                <div class="pull-left"><i class="text-info ti-home"></i><span {{-- class="right-nav-text">{{ __('main_trans.Dashboard_page') }}</span> --}}
                                         class="right-nav-text">{{ __('Dashboard') }}</span>
                                 </div>
                                 <div class="pull-right"><i class="ti-plus"></i></div>
@@ -15,7 +15,6 @@
                             </a>
                             <ul id="dashboard" class="collapse" data-parent="#sidebarnav">
                                 <li> <a href="index.html">Dashboard 01</a> </li>
-                                <li> <a href="index-02.html">Dashboard 02</a> </li>
                             </ul>
                         </li>
                         <!-- menu title -->
@@ -23,8 +22,9 @@
                         <!-- menu item Elements-->
                         <li>
                             <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements">
-                                <div class="pull-left"><i class="ti-palette"></i><span {{-- class="right-nav-text">{{ __('main_trans.Grades') }}</span></div> --}}
-                                        class="right-nav-text">{{ __('Governorates') }}</span></div>
+                                <div class="pull-left"><i class="text-info ti-location-arrow"></i><span
+                                        {{-- class="right-nav-text">{{ __('main_trans.Grades') }}</span></div> --}} class="right-nav-text">{{ __('Governorates') }}</span>
+                                </div>
                                 <div class="pull-right"><i class="ti-plus"></i></div>
                                 <div class="clearfix"></div>
                             </a>
@@ -37,8 +37,8 @@
                         <!-- menu item -->
                         <li>
                             <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements1">
-                                <div class="pull-left"><i class="ti-palette"></i><span {{-- class="right-nav-text">{{ __('main_trans.Grades') }}</span></div> --}}
-                                        class="right-nav-text">{{ __('Cities') }}</span></div>
+                                <div class="pull-left"><i class="text-info ti-location-pin"></i><span
+                                        {{-- class="right-nav-text">{{ __('main_trans.Grades') }}</span></div> --}} class="right-nav-text">{{ __('Cities') }}</span></div>
                                 <div class="pull-right"><i class="ti-plus"></i></div>
                                 <div class="clearfix"></div>
                             </a>
@@ -50,8 +50,8 @@
 
                         <li>
                             <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements2">
-                                <div class="pull-left"><i class="ti-palette"></i><span {{-- class="right-nav-text">{{ __('main_trans.Grades') }}</span></div> --}}
-                                        class="right-nav-text">{{ __('Posts') }}</span></div>
+                                <div class="pull-left"><i class="text-info ti-layout-menu-v"></i><span
+                                        {{-- class="right-nav-text">{{ __('main_trans.Grades') }}</span></div> --}} class="right-nav-text">{{ __('Posts') }}</span></div>
                                 <div class="pull-right"><i class="ti-plus"></i></div>
                                 <div class="clearfix"></div>
                             </a>
@@ -63,7 +63,7 @@
 
                         <li>
                             <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements3">
-                                <div class="pull-left"><i class="ti-palette"></i><span {{-- class="right-nav-text">{{ __('main_trans.Grades') }}</span></div> --}}
+                                <div class="pull-left"><i class="text-info ti-layers"></i><span {{-- class="right-nav-text">{{ __('main_trans.Grades') }}</span></div> --}}
                                         class="right-nav-text">{{ __('Categories') }}</span></div>
                                 <div class="pull-right"><i class="ti-plus"></i></div>
                                 <div class="clearfix"></div>
@@ -76,7 +76,7 @@
 
                         <li>
                             <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements4">
-                                <div class="pull-left"><i class="ti-palette"></i><span {{-- class="right-nav-text">{{ __('main_trans.Grades') }}</span></div> --}}
+                                <div class="pull-left"><i class="text-info ti-user"></i><span {{-- class="right-nav-text">{{ __('main_trans.Grades') }}</span></div> --}}
                                         class="right-nav-text">{{ __('Clients') }}</span></div>
                                 <div class="pull-right"><i class="ti-plus"></i></div>
                                 <div class="clearfix"></div>
@@ -90,7 +90,7 @@
 
                         <li>
                             <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements5">
-                                <div class="pull-left"><i class="ti-palette"></i><span
+                                <div class="pull-left"><i class="text-info ti-comments"></i><span
                                         class="right-nav-text">{{ __('Contacts') }}</span></div>
                                 <div class="pull-right"><i class="ti-plus"></i></div>
                                 <div class="clearfix"></div>
@@ -103,7 +103,7 @@
 
                         <li>
                             <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements6">
-                                <div class="pull-left"><i class="ti-palette"></i><span
+                                <div class="pull-left"><i class="text-info ti-pin"></i><span
                                         class="right-nav-text">{{ __('Donations') }}</span></div>
                                 <div class="pull-right"><i class="ti-plus"></i></div>
                                 <div class="clearfix"></div>
@@ -117,18 +117,36 @@
 
                         <li>
                             <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements7">
-                                <div class="pull-left"><i class="ti-palette"></i><span
-                                        class="right-nav-text">{{ __('Settings') }}</span></div>
+                                <div class="pull-left"><i class="text-info ti-id-badge"></i><span
+                                        class="right-nav-text">{{ __('Users') }}</span>
+                                </div>
                                 <div class="pull-right"><i class="ti-plus"></i></div>
                                 <div class="clearfix"></div>
                             </a>
+
+                            <ul id="elements7" class="collapse" data-parent="#sidebarnav">
+                                <li><a href="{{ route('users.index') }}">{{ __('Settings List') }}</a>
+                                </li>
+                            </ul>
+
+                        </li>
+
+
+                        <li>
+                            <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements7">
+                                <div class="pull-left"><i class="text-info ti-settings"></i><span
+                                        class="right-nav-text">{{ __('Settings') }}</span>
+                                </div>
+                                <div class="pull-right"><i class="ti-plus"></i></div>
+                                <div class="clearfix"></div>
+                            </a>
+
                             <ul id="elements7" class="collapse" data-parent="#sidebarnav">
                                 <li><a href="{{ route('admin.settings.edit') }}">{{ __('Settings List') }}</a>
                                 </li>
                             </ul>
+
                         </li>
-
-
 
                     </ul>
                 </div>

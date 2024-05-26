@@ -91,9 +91,6 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{{ route('admin.password.edit') }}"><i
                         class="text-warning ti-user"></i>Profile</a>
-                <a class="dropdown-item" href="#"><i class="text-dark ti-layers-alt"></i>Projects <span
-                        class="badge badge-info">6</span> </a>
-                <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#"><i class="text-info ti-settings"></i>Settings</a>
                 <form id="logoutForm" action="{{ route('logout') }}" method="POST">
                     @csrf

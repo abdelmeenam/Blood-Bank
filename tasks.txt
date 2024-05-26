@@ -1,6 +1,7 @@
 Admin dashboard tasks
 =====================
-- users module - roles module - Spatie
+- users module
+- roles
 
 //-----------Git commands------------------
 git branch -v               : list all branches with the last commit
