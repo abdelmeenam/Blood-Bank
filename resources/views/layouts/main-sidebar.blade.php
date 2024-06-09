@@ -117,9 +117,14 @@
 
                         <li>
                             <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements7">
+<<<<<<< HEAD
                                 <div class="pull-left"><i class="text-info ti-id-badge"></i><span
                                         class="right-nav-text">{{ __('Users') }}</span>
                                 </div>
+=======
+                                <div class="pull-left"><i class="ti-palette"></i><span
+                                        class="right-nav-text">{{ __('Admins') }}</span></div>
+>>>>>>> e6235a202f6f7643cce5012104e3f351bcb17c1b
                                 <div class="pull-right"><i class="ti-plus"></i></div>
                                 <div class="clearfix"></div>
                             </a>
@@ -142,6 +147,20 @@
                             </a>
 
                             <ul id="elements7" class="collapse" data-parent="#sidebarnav">
+                                <li><a href="{{ route('admins.index') }}">{{ __('Admins List') }}</a>
+                                </li>
+                            </ul>
+                        </li>
+
+
+                        <li>
+                            <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements8">
+                                <div class="pull-left"><i class="ti-palette"></i><span
+                                        class="right-nav-text">{{ __('Settings') }}</span></div>
+                                <div class="pull-right"><i class="ti-plus"></i></div>
+                                <div class="clearfix"></div>
+                            </a>
+                            <ul id="elements8" class="collapse" data-parent="#sidebarnav">
                                 <li><a href="{{ route('admin.settings.edit') }}">{{ __('Settings List') }}</a>
                                 </li>
                             </ul>

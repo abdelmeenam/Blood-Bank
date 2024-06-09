@@ -12,7 +12,11 @@ use App\Http\Controllers\AdminDashboard\CategoryController;
 use App\Http\Controllers\AdminDashboard\DonationController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\AdminDashboard\GovernorateController;
+<<<<<<< HEAD
 use App\Http\Controllers\AdminDashboard\UserController;
+=======
+use App\Http\Controllers\AdminDashboard\AdminController;
+>>>>>>> e6235a202f6f7643cce5012104e3f351bcb17c1b
 
 Route::get('/', function () {
     return view('welcome');
@@ -29,7 +33,11 @@ Route::group(
         Route::resource('categories', CategoryController::class);
         Route::resource('contacts', ContactController::class);
         Route::resource('donations', DonationController::class);
+<<<<<<< HEAD
         Route::resource('users', UserController::class);
+=======
+        Route::resource('admins', AdminController::class);
+>>>>>>> e6235a202f6f7643cce5012104e3f351bcb17c1b
 
         // Edit Settings
         Route::get('/settings/edit', [SettingController::class, 'editSetting'])->name('admin.settings.edit');
