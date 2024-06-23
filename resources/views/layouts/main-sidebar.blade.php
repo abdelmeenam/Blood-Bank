@@ -20,100 +20,113 @@
                         <!-- menu title -->
                         <li class="mt-10 mb-10 text-muted pl-4 font-medium menu-title">Components </li>
                         <!-- menu item Elements-->
-                        <li>
-                            <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements">
-                                <div class="pull-left"><i class="text-info ti-location-arrow"></i><span
-                                        {{-- class="right-nav-text">{{ __('main_trans.Grades') }}</span></div> --}} class="right-nav-text">{{ __('Governorates') }}</span>
-                                </div>
-                                <div class="pull-right"><i class="ti-plus"></i></div>
-                                <div class="clearfix"></div>
-                            </a>
-                            <ul id="elements" class="collapse" data-parent="#sidebarnav">
-                                <li><a href="{{ route('governorates.index') }}">{{ __('Governorates List') }}</a>
-                                </li>
-                            </ul>
-                        </li>
 
-                        <!-- menu item -->
-                        <li>
-                            <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements1">
-                                <div class="pull-left"><i class="text-info ti-location-pin"></i><span
-                                        {{-- class="right-nav-text">{{ __('main_trans.Grades') }}</span></div> --}} class="right-nav-text">{{ __('Cities') }}</span></div>
-                                <div class="pull-right"><i class="ti-plus"></i></div>
-                                <div class="clearfix"></div>
-                            </a>
-                            <ul id="elements1" class="collapse" data-parent="#sidebarnav">
-                                <li><a href="{{ route('cities.index') }}">{{ __('Cities List') }}</a>
-                                </li>
-                            </ul>
-                        </li>
+                        @can('read_governorates')
+                            <li>
+                                <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements">
+                                    <div class="pull-left"><i class="text-info ti-location-arrow"></i><span
+                                            {{-- class="right-nav-text">{{ __('main_trans.Grades') }}</span></div> --}} class="right-nav-text">{{ __('Governorates') }}</span>
+                                    </div>
+                                    <div class="pull-right"><i class="ti-plus"></i></div>
+                                    <div class="clearfix"></div>
+                                </a>
+                                <ul id="elements" class="collapse" data-parent="#sidebarnav">
+                                    <li><a href="{{ route('governorates.index') }}">{{ __('Governorates List') }}</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endcan
 
-                        <li>
-                            <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements2">
-                                <div class="pull-left"><i class="text-info ti-layout-menu-v"></i><span
-                                        {{-- class="right-nav-text">{{ __('main_trans.Grades') }}</span></div> --}} class="right-nav-text">{{ __('Posts') }}</span></div>
-                                <div class="pull-right"><i class="ti-plus"></i></div>
-                                <div class="clearfix"></div>
-                            </a>
-                            <ul id="elements2" class="collapse" data-parent="#sidebarnav">
-                                <li><a href="{{ route('posts.index') }}">{{ __('Posts List') }}</a>
-                                </li>
-                            </ul>
-                        </li>
+                        @can('read_cities')
+                            <!-- menu item -->
+                            <li>
+                                <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements1">
+                                    <div class="pull-left"><i class="text-info ti-location-pin"></i><span
+                                            {{-- class="right-nav-text">{{ __('main_trans.Grades') }}</span></div> --}} class="right-nav-text">{{ __('Cities') }}</span></div>
+                                    <div class="pull-right"><i class="ti-plus"></i></div>
+                                    <div class="clearfix"></div>
+                                </a>
+                                <ul id="elements1" class="collapse" data-parent="#sidebarnav">
+                                    <li><a href="{{ route('cities.index') }}">{{ __('Cities List') }}</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endcan
 
-                        <li>
-                            <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements3">
-                                <div class="pull-left"><i class="text-info ti-layers"></i><span {{-- class="right-nav-text">{{ __('main_trans.Grades') }}</span></div> --}}
-                                        class="right-nav-text">{{ __('Categories') }}</span></div>
-                                <div class="pull-right"><i class="ti-plus"></i></div>
-                                <div class="clearfix"></div>
-                            </a>
-                            <ul id="elements3" class="collapse" data-parent="#sidebarnav">
-                                <li><a href="{{ route('categories.index') }}">{{ __('Categories List') }}</a>
-                                </li>
-                            </ul>
-                        </li>
+                        @can('read_posts')
+                            <li>
+                                <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements2">
+                                    <div class="pull-left"><i class="text-info ti-layout-menu-v"></i><span
+                                            {{-- class="right-nav-text">{{ __('main_trans.Grades') }}</span></div> --}} class="right-nav-text">{{ __('Posts') }}</span></div>
+                                    <div class="pull-right"><i class="ti-plus"></i></div>
+                                    <div class="clearfix"></div>
+                                </a>
+                                <ul id="elements2" class="collapse" data-parent="#sidebarnav">
+                                    <li><a href="{{ route('posts.index') }}">{{ __('Posts List') }}</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endcan
 
-                        <li>
-                            <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements4">
-                                <div class="pull-left"><i class="text-info ti-user"></i><span {{-- class="right-nav-text">{{ __('main_trans.Grades') }}</span></div> --}}
-                                        class="right-nav-text">{{ __('Clients') }}</span></div>
-                                <div class="pull-right"><i class="ti-plus"></i></div>
-                                <div class="clearfix"></div>
-                            </a>
-                            <ul id="elements4" class="collapse" data-parent="#sidebarnav">
-                                <li><a href="{{ route('clients.index') }}">{{ __('Clients List') }}</a>
-                                </li>
-                            </ul>
-                        </li>
+                        @can('read_categories')
+                            <li>
+                                <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements3">
+                                    <div class="pull-left"><i class="text-info ti-layers"></i><span {{-- class="right-nav-text">{{ __('main_trans.Grades') }}</span></div> --}}
+                                            class="right-nav-text">{{ __('Categories') }}</span></div>
+                                    <div class="pull-right"><i class="ti-plus"></i></div>
+                                    <div class="clearfix"></div>
+                                </a>
+                                <ul id="elements3" class="collapse" data-parent="#sidebarnav">
+                                    <li><a href="{{ route('categories.index') }}">{{ __('Categories List') }}</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endcan
+                        @can('read_clients')
+                            <li>
+                                <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements4">
+                                    <div class="pull-left"><i class="text-info ti-user"></i><span {{-- class="right-nav-text">{{ __('main_trans.Grades') }}</span></div> --}}
+                                            class="right-nav-text">{{ __('Clients') }}</span></div>
+                                    <div class="pull-right"><i class="ti-plus"></i></div>
+                                    <div class="clearfix"></div>
+                                </a>
+                                <ul id="elements4" class="collapse" data-parent="#sidebarnav">
+                                    <li><a href="{{ route('clients.index') }}">{{ __('Clients List') }}</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endcan
 
 
-                        <li>
-                            <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements5">
-                                <div class="pull-left"><i class="text-info ti-comments"></i><span
-                                        class="right-nav-text">{{ __('Contacts') }}</span></div>
-                                <div class="pull-right"><i class="ti-plus"></i></div>
-                                <div class="clearfix"></div>
-                            </a>
-                            <ul id="elements5" class="collapse" data-parent="#sidebarnav">
-                                <li><a href="{{ route('contacts.index') }}">{{ __('Contacts List') }}</a>
-                                </li>
-                            </ul>
-                        </li>
+                        @can('read_contacts')
+                            <li>
+                                <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements5">
+                                    <div class="pull-left"><i class="text-info ti-comments"></i><span
+                                            class="right-nav-text">{{ __('Contacts') }}</span></div>
+                                    <div class="pull-right"><i class="ti-plus"></i></div>
+                                    <div class="clearfix"></div>
+                                </a>
+                                <ul id="elements5" class="collapse" data-parent="#sidebarnav">
+                                    <li><a href="{{ route('contacts.index') }}">{{ __('Contacts List') }}</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endcan
 
-                        <li>
-                            <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements6">
-                                <div class="pull-left"><i class="text-info ti-pin"></i><span
-                                        class="right-nav-text">{{ __('Donations') }}</span></div>
-                                <div class="pull-right"><i class="ti-plus"></i></div>
-                                <div class="clearfix"></div>
-                            </a>
-                            <ul id="elements6" class="collapse" data-parent="#sidebarnav">
-                                <li><a href="{{ route('donations.index') }}">{{ __('Donations List') }}</a>
-                                </li>
-                            </ul>
-                        </li>
-
+                        @can('read_donations')
+                            <li>
+                                <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements6">
+                                    <div class="pull-left"><i class="text-info ti-pin"></i><span
+                                            class="right-nav-text">{{ __('Donations') }}</span></div>
+                                    <div class="pull-right"><i class="ti-plus"></i></div>
+                                    <div class="clearfix"></div>
+                                </a>
+                                <ul id="elements6" class="collapse" data-parent="#sidebarnav">
+                                    <li><a href="{{ route('donations.index') }}">{{ __('Donations List') }}</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endcan
 
                         @can('read_users')
                             <li>
@@ -149,35 +162,38 @@
                         @endcan
 
 
-
-                        <li>
-                            <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements10">
-                                <div class="pull-left"><i class="text-info ti-id-badge"></i><span
-                                        class="right-nav-text">{{ __('Permissions') }}</span>
-                                </div>
-                                <div class="pull-right
+                        @can('read_permissions')
+                            <li>
+                                <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements10">
+                                    <div class="pull-left"><i class="text-info ti-id-badge"></i><span
+                                            class="right-nav-text">{{ __('Permissions') }}</span>
+                                    </div>
+                                    <div class="pull-right
                                 "><i class="ti-plus"></i></div>
-                                <div class="clearfix"></div>
-                            </a>
-                            <ul id="elements10" class="collapse" data-parent="#sidebarnav">
-                                <li><a href="{{ route('permissions.index') }}">{{ __('Permissions List') }}</a>
-                                </li>
-                            </ul>
-                        </li>
+                                    <div class="clearfix"></div>
+                                </a>
+                                <ul id="elements10" class="collapse" data-parent="#sidebarnav">
+                                    <li><a href="{{ route('permissions.index') }}">{{ __('Permissions List') }}</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endcan
 
-                        <li>
-                            <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements8">
-                                <div class="pull-left"><i class="text-info ti-id-badge"></i><span
-                                        class="right-nav-text">{{ __('Settings') }}</span>
-                                </div>
-                                <div class="pull-right"><i class="ti-plus"></i></div>
-                                <div class="clearfix"></div>
-                            </a>
-                            <ul id="elements8" class="collapse" data-parent="#sidebarnav">
-                                <li><a href="{{ route('admin.settings.edit') }}">{{ __('Settings') }}</a>
-                                </li>
-                            </ul>
-                        </li>
+                        @can('read_settings')
+                            <li>
+                                <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements8">
+                                    <div class="pull-left"><i class="text-info ti-id-badge"></i><span
+                                            class="right-nav-text">{{ __('Settings') }}</span>
+                                    </div>
+                                    <div class="pull-right"><i class="ti-plus"></i></div>
+                                    <div class="clearfix"></div>
+                                </a>
+                                <ul id="elements8" class="collapse" data-parent="#sidebarnav">
+                                    <li><a href="{{ route('admin.settings.edit') }}">{{ __('Settings') }}</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endcan
 
                     </ul>
                 </div>

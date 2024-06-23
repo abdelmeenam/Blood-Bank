@@ -52,15 +52,7 @@
                                     <td>{{ $role->name }}</td>
                                     <td>{{ $role->guard_name }}</td>
                                     <td>
-                                        <form action="{{ route('roles.edit', $role->id) }}" method="GET">
-                                            @csrf
-                                            <button type="submit" class="btn btn-info btn-sm" data-toggle="modal"
-                                                data-target="#edit{{ $role->id }}"> {{ __('Edit') }}</button>
-                                        </form>
-
-                                        {{-- <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                                            data-target="#delete{{ $role->id }}"> {{ __('Delete') }}</button> --}}
-
+                                        <a href="{{ route('roles.edit', $role) }}" class="btn btn-info btn-sm">Edit</a>
                                     </td>
                                 </tr>
                             @endforeach

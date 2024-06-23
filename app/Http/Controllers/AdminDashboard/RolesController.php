@@ -5,15 +5,12 @@ namespace App\Http\Controllers\AdminDashboard;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 use Spatie\Permission\Models\Permission;
 
 class RolesController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->authorizeResource(Role::class, 'role');
-    }
 
 
 
@@ -22,6 +19,7 @@ class RolesController extends Controller
      */
     public function index()
     {
+        Gate::authorize('read_roles');
         $roles = Role::latest()->paginate(5);
         return view('AdminDashboard.Roles.index', compact('roles'));
     }
@@ -31,6 +29,7 @@ class RolesController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create_roles');
         $roles = Role::latest()->paginate(5);
         $permissions = Permission::all();
         return view('AdminDashboard.Roles.create', compact('roles', 'permissions'));
@@ -41,11 +40,11 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create_roles');
         $this->validate($request, [
             'name' => 'required|unique:roles,name',
             'permissions' => 'required',
         ]);
-
 
         $role = Role::create(['name' => $request->get('name')]);
         $role->syncPermissions($request->get('permissions'));
@@ -54,19 +53,15 @@ class RolesController extends Controller
         return redirect()->route('roles.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
+
+        Gate::authorize('edit_roles');
         $role = Role::findById($id);
         $permissions = Permission::all();
         $rolePermissions = $role->permissions->pluck('name')->toArray();
@@ -78,13 +73,14 @@ class RolesController extends Controller
      */
     public function update(Role $role, Request $request)
     {
+        Gate::authorize('edit_roles');
         $this->validate($request, [
-            'name' => 'required',
-            'permission' => 'required',
+            'name' => 'required|unique:roles,name,' . $role->id . 'id',
+            'permissions' => 'required',
         ]);
 
         $role->update($request->only('name'));
-        $role->syncPermissions($request->get('permission'));
+        $role->syncPermissions($request->get('permissions'));
 
         toastr()->success(__('Role has been updated successfully'));
         return redirect()->route('roles.index');
@@ -95,6 +91,10 @@ class RolesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Gate::authorize('delete_roles');
+        $role = Role::findById($id);
+        $role->delete();
+        toastr()->success(__('Role has been deleted successfully'));
+        return redirect()->route('roles.index');
     }
 }

@@ -65,7 +65,8 @@
                             @foreach ($permissions as $permission)
                                 <tr>
                                     <td>
-                                        <input type="checkbox" name="permissions[]" value="{{ $permission->id }}"
+                                        <input type="checkbox" name="permissions[{{ $permission->name }}]"
+                                            value="{{ $permission->name }}"
                                             {{ $role->hasPermissionTo($permission->name) ? 'checked' : '' }}>
                                     </td>
                                     <td>{{ $permission->name }}</td>

@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\AdminDashboard;
 
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Permission;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
+use Spatie\Permission\Models\Permission;
 
 
 class PermissionsController extends Controller
@@ -14,7 +15,7 @@ class PermissionsController extends Controller
      */
     public function index()
     {
-
+        Gate::authorize('read_permissions');
         $permissions = Permission::all();
         return view('AdminDashboard.Permissions.index', compact('permissions'));
     }

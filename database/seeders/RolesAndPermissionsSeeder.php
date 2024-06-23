@@ -56,10 +56,12 @@ class RolesAndPermissionsSeeder extends Seeder
         'create_governorates',
         'update_governorates',
         'delete_governorates',
+
         'read_cities',
         'create_cities',
         'update_cities',
         'delete_cities',
+
         'read_categories',
         'create_categories',
         'update_categories',
@@ -90,7 +92,11 @@ class RolesAndPermissionsSeeder extends Seeder
         'read_categories',
         'create_categories',
         'update_categories',
-        'delete_categories'
+        'delete_categories',
+        'read_contacts',
+        'create_contacts',
+        'update_contacts',
+        'delete_contacts',
     ];
 
     private $viewerPermissions = [
