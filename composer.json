@@ -14,7 +14,7 @@
         "laravel/scout": "^10.8",
         "laravel/tinker": "^2.8",
         "mcamara/laravel-localization": "^2.0",
-        "spatie/laravel-permission": "^6.7",
+        "spatie/laravel-permission": "^6.8",
         "spatie/laravel-translatable": "^6.6",
         "twilio/sdk": "^7.16",
         "yoeunes/toastr": "^2.3"

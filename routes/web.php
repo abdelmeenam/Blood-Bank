@@ -12,11 +12,9 @@ use App\Http\Controllers\AdminDashboard\CategoryController;
 use App\Http\Controllers\AdminDashboard\DonationController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\AdminDashboard\GovernorateController;
-<<<<<<< HEAD
 use App\Http\Controllers\AdminDashboard\UserController;
-=======
-use App\Http\Controllers\AdminDashboard\AdminController;
->>>>>>> e6235a202f6f7643cce5012104e3f351bcb17c1b
+use App\Http\Controllers\AdminDashboard\PermissionsController;
+use App\Http\Controllers\AdminDashboard\RolesController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,7 +22,12 @@ Route::get('/', function () {
 
 
 Route::group(
-    ['prefix' => LaravelLocalization::setLocale(),    'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath', 'auth']],
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [
+            'localeSessionRedirect', 'localizationRedirect', 'localeViewPath', 'auth',
+        ]
+    ],
     function () {
         Route::resource('governorates', GovernorateController::class);
         Route::resource('cities', CityController::class);
@@ -33,11 +36,9 @@ Route::group(
         Route::resource('categories', CategoryController::class);
         Route::resource('contacts', ContactController::class);
         Route::resource('donations', DonationController::class);
-<<<<<<< HEAD
         Route::resource('users', UserController::class);
-=======
-        Route::resource('admins', AdminController::class);
->>>>>>> e6235a202f6f7643cce5012104e3f351bcb17c1b
+        Route::resource('roles', RolesController::class);
+        Route::resource('permissions', PermissionsController::class);
 
         // Edit Settings
         Route::get('/settings/edit', [SettingController::class, 'editSetting'])->name('admin.settings.edit');
@@ -53,7 +54,6 @@ Route::group(
 
         // Search Clients
         Route::get('/search-clients', [ClientController::class, 'searchClients'])->name('search-clients');
-
         Route::get('/dashboard', function () {
             return view('dashboard');
         })->name('dashboard');

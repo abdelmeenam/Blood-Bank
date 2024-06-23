@@ -115,56 +115,68 @@
                         </li>
 
 
+                        @can('read_users')
+                            <li>
+                                <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements7">
+                                    <div class="pull-left"><i class="text-info ti-id-badge"></i><span
+                                            class="right-nav-text">{{ __('Users') }}</span>
+                                    </div>
+                                    <div class="pull-right"><i class="ti-plus"></i></div>
+                                    <div class="clearfix"></div>
+                                </a>
+                                <ul id="elements7" class="collapse" data-parent="#sidebarnav">
+                                    <li><a href="{{ route('users.index') }}">{{ __('Admins List') }}</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endcan
+
+                        @can('read_roles')
+                            <li>
+                                <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements9">
+                                    <div class="pull-left"><i class="text-info ti-id-badge"></i><span
+                                            class="right-nav-text">{{ __('Roles') }}</span>
+                                    </div>
+                                    <div class="pull-right
+                                "><i class="ti-plus"></i></div>
+                                    <div class="clearfix"></div>
+                                </a>
+                                <ul id="elements9" class="collapse" data-parent="#sidebarnav">
+                                    <li><a href="{{ route('roles.index') }}">{{ __('Roles List') }}</a></li>
+                                    <li><a href="{{ route('roles.create') }}">{{ __('Add Role') }}</a></li>
+                                </ul>
+                            </li>
+                        @endcan
+
+
+
                         <li>
-                            <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements7">
-<<<<<<< HEAD
+                            <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements10">
                                 <div class="pull-left"><i class="text-info ti-id-badge"></i><span
-                                        class="right-nav-text">{{ __('Users') }}</span>
+                                        class="right-nav-text">{{ __('Permissions') }}</span>
                                 </div>
-=======
-                                <div class="pull-left"><i class="ti-palette"></i><span
-                                        class="right-nav-text">{{ __('Admins') }}</span></div>
->>>>>>> e6235a202f6f7643cce5012104e3f351bcb17c1b
-                                <div class="pull-right"><i class="ti-plus"></i></div>
+                                <div class="pull-right
+                                "><i class="ti-plus"></i></div>
                                 <div class="clearfix"></div>
                             </a>
-
-                            <ul id="elements7" class="collapse" data-parent="#sidebarnav">
-                                <li><a href="{{ route('users.index') }}">{{ __('Settings List') }}</a>
+                            <ul id="elements10" class="collapse" data-parent="#sidebarnav">
+                                <li><a href="{{ route('permissions.index') }}">{{ __('Permissions List') }}</a>
                                 </li>
                             </ul>
-
                         </li>
 
-
                         <li>
-                            <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements7">
-                                <div class="pull-left"><i class="text-info ti-settings"></i><span
+                            <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements8">
+                                <div class="pull-left"><i class="text-info ti-id-badge"></i><span
                                         class="right-nav-text">{{ __('Settings') }}</span>
                                 </div>
                                 <div class="pull-right"><i class="ti-plus"></i></div>
                                 <div class="clearfix"></div>
                             </a>
-
-                            <ul id="elements7" class="collapse" data-parent="#sidebarnav">
-                                <li><a href="{{ route('admins.index') }}">{{ __('Admins List') }}</a>
-                                </li>
-                            </ul>
-                        </li>
-
-
-                        <li>
-                            <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements8">
-                                <div class="pull-left"><i class="ti-palette"></i><span
-                                        class="right-nav-text">{{ __('Settings') }}</span></div>
-                                <div class="pull-right"><i class="ti-plus"></i></div>
-                                <div class="clearfix"></div>
-                            </a>
                             <ul id="elements8" class="collapse" data-parent="#sidebarnav">
-                                <li><a href="{{ route('admin.settings.edit') }}">{{ __('Settings List') }}</a>
+                                <li><a href="{{ route('admin.settings.edit') }}">{{ __('Settings') }}</a>
                                 </li>
                             </ul>
-
                         </li>
 
                     </ul>

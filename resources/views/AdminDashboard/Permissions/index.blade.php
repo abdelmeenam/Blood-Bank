@@ -3,21 +3,18 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @toastr_css
 @section('title')
-    {{ trans('users') }}
+    {{ trans('Permissions') }}
 @stop
 @endsection
 @section('page-header')
 <!-- breadcrumb -->
 @section('PageTitle')
-    {{ trans('users') }}
+    {{ trans('Permissions') }}
 @stop
 <!-- breadcrumb -->
 @endsection
 @section('content')
-<!-- row -->
 <div class="row">
-
-
     <div class="col-xl-12 mb-30">
         <div class="card card-statistics h-100">
             <div class="card-body">
@@ -31,13 +28,10 @@
                     </div>
                 @endif
 
-
                 <button type="button" class="button x-small" data-toggle="modal" data-target="#exampleModal">
-                    {{ trans('Add user') }}
+                    {{ trans('Add Permission') }}
                 </button>
                 <br><br>
-
-
 
                 <div class="table-responsive">
                     <table id="datatable" class="table  table-hover table-sm table-bordered p-0" data-page-length="50"
@@ -45,32 +39,27 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>{{ __('Name') }}</th>
-                                <th>{{ __('Email') }}</th>
-
-
+                                <th scope="col" width="15%">Name</th>
+                                <th scope="col">Guard</th>
                                 <th>{{ __('Processes') }}</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($users as $user)
+                            @foreach ($permissions as $permission)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->email }}</td>
+                                    <td>{{ $permission->name }}</td>
+                                    <td>{{ $permission->guard_name }}</td>
                                     <td>
-
                                         <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
-                                            data-target="#show{{ $user->id }}" title="{{ __('show user') }}"><i
-                                                class="fa fa-eye"></i></button>
-
+                                            data-target="#show{{ $permission->id }}"
+                                            title="{{ __('show permission') }}"><i class="fa fa-eye"></i></button>
                                         <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
-                                            data-target="#edit{{ $user->id }}" title="{{ __('Edit user') }}"><i
-                                                class="fa fa-edit"></i></button>
-
+                                            data-target="#edit{{ $permission->id }}"
+                                            title="{{ __('Edit permission') }}"><i class="fa fa-edit"></i></button>
                                         <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                                            data-target="#delete{{ $user->id }}"
-                                            title="{{ __('Delete user') }}"><i class="fa fa-trash"></i></button>
+                                            data-target="#delete{{ $permission->id }}"
+                                            title="{{ __('Delete permission') }}"><i class="fa fa-trash"></i></button>
                                     </td>
 
                                 </tr>
@@ -80,9 +69,9 @@
 
 
             <!-- delete_modal -->
-            <div class="modal fade" id="delete{{ $user->id }}" tabindex="-1" role="dialog"
+            <div class="modal fade" id="delete{{ $permission->id }}" tabindex="-1" Permission="dialog"
                 aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
+                <div class="modal-dialog" Permission="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 style="font-family: 'Cairo', sans-serif;" class="modal-title" id="exampleModalLabel">
@@ -93,10 +82,10 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="{{ route('users.destroy', $user->id) }}" method="post">
+                            <form action="{{ route('permissions.destroy', $permission->id) }}" method="post">
                                 {{ method_field('Delete') }}
                                 @csrf
-                                {{ __('Do you wanna delete') . ' ' . $user->name . ' ' . __('?') }}
+                                {{ __('Do you wanna delete') . ' ' . $permission->name . ' ' . __('?') }}
 
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
@@ -113,7 +102,7 @@
 
         </div>
         <div class="d-flex justify-content-center">
-            {{-- {{ $users->links() }} --}}
+            {{-- {{ $Permissions->links() }} --}}
         </div>
     </div>
 </div>
@@ -121,42 +110,29 @@
 
 
 <!-- add_modal_Grade -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="exampleModal" tabindex="-1" Permission="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" Permission="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 style="font-family: 'Cairo', sans-serif;" class="modal-title" id="exampleModalLabel">
-                    {{ __('Add user') }}
+                    {{ __('Add Permission') }}
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ route('users.store') }}" method="POST">
+            <form action="{{ route('permissions.store') }}" method="POST">
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="exampleInputEmail1">{{ __('Name') }}</label>
                         <input type="text" class="form-control" name="name">
                     </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">{{ __('Email') }}</label>
-                        <input type="email" class="form-control" name="email">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">{{ __('Password') }}</label>
-                        <input type="password" class="form-control" name="password">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">{{ __('Confirm Password') }}</label>
-                        <input type="password" class="form-control" name="password_confirmation">
-                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary"
-                        data-dismiss="modal">{{ __('Cancel') }}</button>
-                    <button type="submit" class="btn btn-success">{{ __('Add Admin') }}</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('Cancel') }}</button>
+                    <button type="submit" class="btn btn-success">{{ __('Add Permission') }}</button>
                 </div>
             </form>
 

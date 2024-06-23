@@ -6,6 +6,14 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+
+
+/**
+Users Controller : to manage users  that can access the system dashboar
+    - Get all admins
+    - Add admin
+ */
+
 class UserController extends Controller
 {
     public function index()

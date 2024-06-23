@@ -37,6 +37,11 @@ $request->user()->posts هنا جبت الداتا
 $request->user()->posts()->latest()   مجرد ماعملت الفوسين كده دخلت ع الكويرى بيلدر وهعمل كويرى ع البوستس
 
 
+// Roles and permission
+php artisan migrate:refresh-permissions
+php artisan db:seed --class=UsersTableSeeder
+
+
 
 
 

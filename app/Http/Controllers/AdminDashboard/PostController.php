@@ -11,11 +11,15 @@ use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        $this->authorize('viewAny', Post::class);
+
         $posts = Post::with('category')->withCount('clients')->get();
         $categories = Category::all();
 
@@ -34,6 +38,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Post::class);
         try {
             $rules = [
                 'title' => 'required|string|max:255',
@@ -90,6 +95,8 @@ class PostController extends Controller
     public function destroy(string $id)
     {
         $post = Post::findOrFail($id);
+        $this->authorize('delete', $post);
+
         $imagePath = $post->image;
         if ($imagePath) {
             Storage::disk('public')->delete($imagePath);
