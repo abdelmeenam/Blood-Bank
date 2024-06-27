@@ -62,6 +62,12 @@ class RolesAndPermissionsSeeder extends Seeder
         'update_cities',
         'delete_cities',
 
+        'read_contacts',
+        'create_contacts',
+        'update_contacts',
+        'delete_contacts',
+
+
         'read_categories',
         'create_categories',
         'update_categories',

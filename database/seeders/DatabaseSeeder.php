@@ -19,5 +19,9 @@ class DatabaseSeeder extends Seeder
         //$this->call(CreatePermissions::class);
         //$this->call(CreateAdminUserSeeder::class);
 
+        //$this->call(RolesAndPermissionsSeeder::class);
+        $this->call(UsersTableSeeder::class);
+
+        //to call this seeder, run php artisan db:seed --class=DatabaseSeeder
     }
 }
