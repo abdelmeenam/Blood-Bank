@@ -86,27 +86,4 @@ class DonationController extends Controller
             $query->where('blood_type_id', $donationRequest->blood_type_id);
         })->pluck('id')->toArray();
     }
-
-
-    /**
-    private function getClientFcmTokens(DonationRequest $donationRequest)
-    {
-        $tokens = FcmToken::whereNotNull('token') // Exclude null tokens
-            ->where('token', '!=', '') // Exclude empty strings
-            ->whereHas('client', function ($query) use ($donationRequest) {
-                $query->whereHas('governorates', function ($query) use ($donationRequest) {
-                    $query->where('governorate_id', $donationRequest->city->governorate_id);
-                })->whereHas('bloodTypes', function ($query) use ($donationRequest) {
-                    $query->where('blood_type_id', $donationRequest->blood_type_id);
-                });
-            })->pluck('token')->toArray();
-
-        return $tokens;
-    }
-
-            $registeredToken = [
-            'fNL3fhAHTyycJ3STDwhaKz:APA91bFrHKYZXvSshdmv8P3dL0FZ3D_4MwsDJkrfFb-YMIKygDnwaRrHzk4GJgBhZfyD7reFFWNYvKMobAmoxpKuBwTV_WIEKP5Q_RzSRSGAqVzZDoLpzeu4sgUF696s0XzcYqH-u72C',
-            'fGzj4cLwRJ2a36HAYfC5IL:APA91bG0XTshQa46kJ1GDCF4gI5BXMmMjx56AsayT0OhWaSnzS3KGf2IjqbAo7VPNzJpu6wTAT_uDP9F6LRiQLOXjYE8tUm29RQ30YqQfC0V0Oj65fGab84psNIIREFpUKg819Cjnh4c',
-        ];
-     */
 }

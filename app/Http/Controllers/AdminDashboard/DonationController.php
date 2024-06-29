@@ -64,6 +64,13 @@ class DonationController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        //delete donation request with it's id and his own relations
+        $donation = DonationRequest::find($id);
+        $donation->delete();
+
+        //redirect to the donations page with a toast message
+
+        toastr()->success(__('Donation Deleted Successfully'));
+        return redirect()->route('donations.index');
     }
 }
